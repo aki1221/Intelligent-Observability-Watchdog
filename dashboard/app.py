@@ -77,7 +77,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigation",
-        ["📊 Dashboard", "🚨 Alerts", "📋 Rules", "📡 Live Feed", "🔍 Event Explorer"],
+        ["📊 Dashboard", "🚨 Alerts", "📋 Rules", "📡 Live Feed", "🔍 Event Explorer", "🏥 Health Trends"],
         index=0,
         label_visibility="collapsed",
     )
@@ -115,3 +115,6 @@ elif page == "📡 Live Feed":
 elif page == "🔍 Event Explorer":
     from dashboard.pages import event_explorer
     event_explorer.render(auto_refresh, refresh_interval)
+elif page == "🏥 Health Trends":
+    from dashboard.pages import health_trends
+    health_trends.render(auto_refresh, refresh_interval)

@@ -54,3 +54,27 @@ class Alert(Base):
     triggered_at = Column(DateTime, default=datetime.datetime.utcnow)
     acknowledged_at = Column(DateTime, nullable=True)
     resolved_at = Column(DateTime, nullable=True)
+
+
+class HealthSnapshot(Base):
+    __tablename__ = "health_snapshots"
+
+    id = Column(Integer, primary_key=True, index=True)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow, index=True)
+    total_events_1h = Column(Integer, default=0)
+    error_count_1h = Column(Integer, default=0)
+    critical_count_1h = Column(Integer, default=0)
+    active_alerts = Column(Integer, default=0)
+    breaches = Column(Integer, default=0)
+
+
+class WebhookLog(Base):
+    __tablename__ = "webhook_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    alert_id = Column(Integer, nullable=False)
+    rule_name = Column(String(255), nullable=False)
+    status_code = Column(Integer, default=200)
+    delivered = Column(Boolean, default=True)
+    response_body = Column(Text, default="")
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)

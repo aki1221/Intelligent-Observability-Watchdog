@@ -93,3 +93,17 @@ def update_alert_rule(rule_id: int, update_data: dict) -> dict:
 
 def delete_alert_rule(rule_id: int) -> None:
     _delete(f"/alerts/rules/{rule_id}")
+
+
+# ─── Watchdog & Health ───────────────────────────────────────────────────────
+
+def trigger_watchdog() -> dict:
+    return _post("/watchdog/run", {})
+
+
+def get_webhook_logs(limit: int = 50) -> list:
+    return _get("/watchdog/webhook-logs", params={"limit": limit})
+
+
+def get_health_snapshots(hours: int = 24) -> list:
+    return _get("/watchdog/health-snapshots", params={"hours": hours})

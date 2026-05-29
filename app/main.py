@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.database import engine, Base
-from app.routers import events, alerts, state
+from app.routers import events, alerts, state, watchdog
 from app.websocket import manager
 
 # Create all tables on startup
@@ -30,6 +30,7 @@ app.add_middleware(
 app.include_router(events.router)
 app.include_router(alerts.router)
 app.include_router(state.router)
+app.include_router(watchdog.router)
 
 
 # ─── WebSocket Endpoint ──────────────────────────────────────────────────────
